@@ -4,10 +4,10 @@
     <title>Register</title>
 </head>
 <body>
-    <h1>Crea tu usuario</h1>
+    <h1>Create your user</h1>
     <form th:action="@{/Register}" method="post">
         <input type="text" name="userName" placeholder="Create a userName" required />
-        <input type="text" name="password" placeholder="Create a password" required />
+        <input type="password" name="password" placeholder="Create a password" required />
         <input type="number" name="phone" placeholder="Your phone number" required />
         <button type="submit">Register</button>
     </form>

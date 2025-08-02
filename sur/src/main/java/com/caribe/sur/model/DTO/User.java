@@ -1,10 +1,15 @@
 package com.caribe.sur.model.DTO;
 
-
 public class User {
     public String userName;
     public String password;
     public int phone;
+
+    public User(String userName, String password, int phone) {
+        this.userName = userName;
+        this.password = password;
+        this.phone = phone;
+    }
 
     public String getUserName() {
         return userName;
