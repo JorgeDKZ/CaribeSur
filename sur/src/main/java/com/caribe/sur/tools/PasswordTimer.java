@@ -10,6 +10,7 @@ public class PasswordTimer extends Thread{
 
     // CONSTRUCTOR
     public PasswordTimer() {
+        waitTime = MAX_WAIT_TIME;
         this.start(); // Start the timer thread
     }
 
@@ -17,7 +18,7 @@ public class PasswordTimer extends Thread{
     // decrease the timer every second
     // until it reaches 0
     public void run(){
-        waitTime = MAX_WAIT_TIME;
+        
         while(waitTime > 0) {
             try {
                 Thread.sleep(SECONDS); // Sleep for 1 second
@@ -31,7 +32,7 @@ public class PasswordTimer extends Thread{
     // Get the wait time in minutes
     // to show the user how long they have to wait
     public String getWaitTime() {
-        return waitTime / MINUTES + ":" + (waitTime % MINUTES);
+        return waitTime / MINUTES + ":" + ((waitTime % MINUTES < 10) ? (waitTime % MINUTES) + "0" : (waitTime % MINUTES));
     }
 
     // Check if the wait time is up
