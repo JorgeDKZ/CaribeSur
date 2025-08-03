@@ -2,24 +2,24 @@ package com.caribe.sur.model.DTO;
 
 import java.util.regex.Pattern;
 
-public class AdminHomePage {
+public class Admin {
     // ATRIBUTES
     // only one instance of AdminHomePage should exist
-    private static final AdminHomePage adminHomePage = null;
+    private static final Admin adminHomePage = null;
 
     // example password, should be securely managed
     private String password = "admin123"; 
 
     // CONSTRUCTOR
     // private constructor to prevent instantiation
-    private AdminHomePage() {
+    private Admin() {
         
     }
     // METHODS
     // static method to provide access to the single instance
-    public static AdminHomePage getInstance() {
+    public static Admin getInstance() {
         if (adminHomePage == null) {
-            return new AdminHomePage();
+            return new Admin();
         }
         return adminHomePage;
     }
