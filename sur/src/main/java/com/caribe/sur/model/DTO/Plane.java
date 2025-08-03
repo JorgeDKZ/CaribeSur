@@ -9,7 +9,7 @@ import com.caribe.sur.model.Enumerators.SizeOfPlane;
 public class Plane {
     //ATRIBUTES
     //Places of the plane X = Long of the plane, Y = Place in the both sites
-    private int[][] planeSeats;
+    private User[][] planeSeats;
 
     //Site where the plane starts
     private Sites siteStart;
@@ -47,21 +47,20 @@ public class Plane {
     private void generateSize(SizeOfPlane size) {
         switch (size) {
             case SMALL:
-                planeSeats = new int[30][2];
+                planeSeats = new User[30][2];
                 break;
             case MEDIUM:
-                planeSeats = new int[40][2];
+                planeSeats = new User[40][2];
                 break;
             case LARGE:
-                planeSeats = new int[40][3];
+                planeSeats = new User[40][3];
                 break;
             default:
-                planeSeats = new int[30][2];
+                planeSeats = new User[30][2];
         }
 
     }
 
-    //GETTERS AND SETTERS
     //Return the price of the plane
     //If the user select a seat, the price will be increased
     //If have a few days to the flight, the price will be increased
@@ -71,8 +70,12 @@ public class Plane {
         float endPrice = (isSelecterSeat) ? priceSelecterSeat + price : price;
         float AvailablePercentage = getAvailablePorcentage();
         long day = getDaysToFlight();
-        //Not finish the method
-        return 0;
+        
+        endPrice += (AvailablePercentage < 20) ? endPrice * 0.15f : 0;
+        endPrice += (day < 7) ? endPrice * 0.1f : 0;
+        endPrice -= (AvailablePercentage > 50 && day < 7) ? endPrice * 0.2f : 0;    
+
+        return endPrice;
 
     }
 
@@ -84,6 +87,30 @@ public class Plane {
     // Return the days to the flight
     public long getDaysToFlight() {
         return ChronoUnit.DAYS.between(LocalDate.now(), dateOfFlight);
+    }
+
+    // Add a user to a specific seat
+    // If the seat is available, the user will be added to the seat
+    public boolean addUserToSeat(int x, int y, User user) {
+        // Check if the seat is available
+        if (planeSeats[x][y] == null) {
+            planeSeats[x][y] = user;
+            availableSeats--;
+            return true; // User added successfully
+        }
+        return false; // Seat is already taken
+    }
+
+
+    //GETTERS AND SETTERS
+    // Return the seats of the plane
+    public User[][] getPlaneSeats() {
+        return planeSeats;
+    }
+
+    // Return the number of the seat are available
+    public int getAvailableSeats() {
+        return availableSeats;
     }
 
 }

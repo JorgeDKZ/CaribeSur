@@ -1,6 +1,7 @@
 package com.caribe.sur.controller.HomePage;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.caribe.sur.model.DTO.User;
@@ -20,10 +21,12 @@ public class LogIn {
     }
     
     @PostMapping("Login")
-    public String postMethodName(@RequestParam String userName,@RequestParam String password) {
+    public String postMethodName(Model model, @RequestParam String userName,@RequestParam String password) {
+    
     User user = Warehouse.getUser(userName);
     if(user != null && user.getPassword().equals(password)) {
-        return "redirect:HomePage";
+        model.addAttribute("userName", user.getUserName());
+        return "redirect:UserHomePage";
     } else {
         return "Login";
     }  

@@ -1,6 +1,7 @@
 package com.caribe.sur.controller.HomePage;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class Register {
 
+    
+
+
     @GetMapping("/Register")
     public String getMethodName() {
         return "Register";
@@ -20,10 +24,11 @@ public class Register {
 
 
     @PostMapping("/Register")
-    public String postMethodName(@RequestParam String userName, @RequestParam String password, @RequestParam int phone) {
+    public String postMethodName(Model model,@RequestParam String userName, @RequestParam String password, @RequestParam int phone) {
         User entity = new User(userName, password, phone);
         
         if(Warehouse.addUser(entity)) {
+            model.addAttribute("userName", entity.getUserName());
             return "redirect:HomePage";
         } else {
             return "Register";
