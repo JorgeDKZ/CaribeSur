@@ -1,4 +1,4 @@
-package com.caribe.sur.controller.HomePage;
+package com.caribe.sur.controller.homePage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

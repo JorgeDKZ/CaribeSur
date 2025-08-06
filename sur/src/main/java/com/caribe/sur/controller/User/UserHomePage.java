@@ -1,4 +1,4 @@
-package com.caribe.sur.controller.User;
+package com.caribe.sur.controller.user;
 
 import org.springframework.stereotype.Controller;
 

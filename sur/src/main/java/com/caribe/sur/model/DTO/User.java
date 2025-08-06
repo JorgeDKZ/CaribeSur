@@ -1,8 +1,21 @@
 package com.caribe.sur.model.DTO;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "User name cannot be blank")
     public String userName;
     public String password;
+    
     public int phone;
 
     public User(String userName, String password, int phone) {

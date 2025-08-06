@@ -1,4 +1,4 @@
-package com.caribe.sur.controller.Admin;
+package com.caribe.sur.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,24 +8,22 @@ import com.caribe.sur.tools.PasswordTimer;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 
 @Controller
-public class AdminController {
+public class AdminLoginController {
     // Singleton instance of Admin
     private Admin admin = Admin.getInstance();
     
     //URLs for the admin pages
-    private final String ADMIN_HOME_PAGE = "AdminPages/AdminHomePage";
     private final String ADMIN_LOGIN = "AdminPages/AdminLogin";
 
     // Redirect URLs for the admin pages
     private final String ADMIN_LOGIN_REDIRECT = "redirect:/AdminLogin";
-    private final String ADMIN_HOME_PAGE_REDIRECT = "redirect:/AdminLogin";
+    private final String ADMIN_HOME_PAGE_REDIRECT = "redirect:/AdminHomePage";
     
     // Limit the number of attempts to login
     // If the user exceeds the limit, they must wait a certain time before trying again
@@ -66,18 +64,22 @@ public class AdminController {
         return ADMIN_LOGIN;
     }
 
+
+
+
+
     // Method to check if the password is correct
     @PostMapping("AdminLogin")
-    public String postMethodName(@RequestBody String adminPassword) {
+    public String postMethodName(@RequestParam String adminPassword) {
         
         // Check if the password is correct
-        if(admin.validatePassword(adminPassword)){
+        if(admin.validatePassword(adminPassword) && tryCount > 0) {
             tryCount = MAX_TRY_COUNT; // Reset try count on successful login
             return ADMIN_HOME_PAGE_REDIRECT;
         }else{
             tryCount--;
             return ADMIN_LOGIN_REDIRECT;
-            
+
         }
             
     }
