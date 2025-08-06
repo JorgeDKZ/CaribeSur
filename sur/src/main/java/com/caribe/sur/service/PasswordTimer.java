@@ -1,5 +1,8 @@
-package com.caribe.sur.tools;
+package com.caribe.sur.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class PasswordTimer extends Thread{
     // ATRIBUTES
     // Wait time in seconds

@@ -3,11 +3,10 @@ package com.caribe.sur.controller.admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import com.caribe.sur.model.DTO.Admin;
-import com.caribe.sur.tools.PasswordTimer;
+import com.caribe.sur.model.Admin;
+import com.caribe.sur.service.PasswordTimer;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 

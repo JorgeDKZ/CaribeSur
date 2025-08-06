@@ -1,11 +1,14 @@
 package com.caribe.sur.controller.homePage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.caribe.sur.model.DTO.User;
-import com.caribe.sur.model.logic.Warehouse;
+import com.caribe.sur.model.User;
+import com.caribe.sur.repository.UsersRepository;
+import com.caribe.sur.service.UserGestions;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,23 +18,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LogIn {
 
-    @GetMapping("Login")
+    private final String URL_LOGIN = "/Login";
+
+    private final String HTML_LOGIN = "startPage/Login";
+    private final String HTML_USER_HOME_PAGE = "redirect:UserHomePage";
+
+    @Autowired
+    private UserGestions userGestions;
+
+    @GetMapping(URL_LOGIN)
     public String getMethodName() {
-        return "Login"; 
+        return HTML_LOGIN; 
     }
     
-    @PostMapping("Login")
-    public String postMethodName(Model model, @RequestParam String userName,@RequestParam String password) {
-    
-    User user = Warehouse.getUser(userName);
-    if(user != null && user.getPassword().equals(password)) {
-        model.addAttribute("userName", user.getUserName());
-        return "redirect:UserHomePage";
-    } else {
-        return "Login";
+    @PostMapping(URL_LOGIN)
+    public String postMethodName(Model model, @ModelAttribute User user) {
+    User userExist = userGestions.findUserById(user.getUserName());
+
+   if(userExist != null && userExist.getPassword().equals(user.getPassword())) {
+       return HTML_USER_HOME_PAGE;
+   } else {
+       return HTML_LOGIN;
     }  
 
-        
     }
     
 

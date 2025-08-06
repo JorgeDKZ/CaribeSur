@@ -1,10 +1,10 @@
-package com.caribe.sur.model.DTO;
+package com.caribe.sur.model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import com.caribe.sur.model.enumerators.Sites;
-import com.caribe.sur.model.enumerators.SizeOfPlane;
+import com.caribe.sur.enumerators.Sites;
+import com.caribe.sur.enumerators.SizeOfPlane;
 
 public class Plane {
     //ATRIBUTES

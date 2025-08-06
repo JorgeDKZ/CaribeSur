@@ -1,38 +1,52 @@
 package com.caribe.sur.controller.homePage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.caribe.sur.model.DTO.User;
-import com.caribe.sur.model.logic.Warehouse;
+import com.caribe.sur.model.User;
+import com.caribe.sur.service.UserGestions;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class Register {
 
-    
+    private final String URL_REGISTER = "/Register";
+    private final String URL_REDIRECT_HOMEPAGE = "redirect:HomePage";
 
+    private final String HTML_REGISTER = "startPage/Register";
 
-    @GetMapping("/Register")
+    @Autowired
+    UserGestions userGestions;
+
+    /**
+     * Get the registration page.
+     * @return the registration page.
+     */
+    @GetMapping(URL_REGISTER)
     public String getMethodName() {
-        return "Register";
+        return HTML_REGISTER;
     }
     
 
-
-    @PostMapping("/Register")
-    public String postMethodName(Model model,@RequestParam String userName, @RequestParam String password, @RequestParam int phone) {
-        User entity = new User(userName, password, phone);
+    /**
+     * Get the user from the registration page and save it in the database.
+     * @param user - the user getting from the registration form.
+     * @return 
+     */
+    @PostMapping(URL_REGISTER)
+    public String postMethodName(@ModelAttribute User user) {
         
-        if(Warehouse.addUser(entity)) {
-            model.addAttribute("userName", entity.getUserName());
-            return "redirect:HomePage";
-        } else {
-            return "Register";
-        }
+        if(userGestions.findUserById(user.getUserName()) == null) {
+            userGestions.saveUser(user);
+            return URL_REDIRECT_HOMEPAGE;
+      } else {
+        return HTML_REGISTER;
+       }
     }
     
 }

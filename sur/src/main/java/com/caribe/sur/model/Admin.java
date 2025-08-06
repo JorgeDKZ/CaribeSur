@@ -1,4 +1,4 @@
-package com.caribe.sur.model.DTO;
+package com.caribe.sur.model;
 
 import java.util.regex.Pattern;
 
@@ -9,6 +9,8 @@ public class Admin {
 
     // example password, should be securely managed
     private String password = "admin123"; 
+
+    
 
     // CONSTRUCTOR
     // private constructor to prevent instantiation

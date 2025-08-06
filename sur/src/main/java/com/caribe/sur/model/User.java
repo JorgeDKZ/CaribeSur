@@ -1,29 +1,48 @@
-package com.caribe.sur.model.DTO;
+package com.caribe.sur.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+/**
+ * User model class representing a user in the system.
+ */
 @Entity
+@Table(name = "users")
 public class User {
 
+    // ATRIBUTES
+    // Primary key is userName, userName is unique per user
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String userName;
+    // Password for the user
+    private String password;
+    // Phone number for the user
+    private int phone;
+    // Optional field for user's Gmail
+    private String gmail;
 
-    @NotBlank(message = "User name cannot be blank")
-    public String userName;
-    public String password;
+    // CONSTRUCTORS
+    /**
+     * Default constructor for JPA.
+     */
+    public User() {}
     
-    public int phone;
-
-    public User(String userName, String password, int phone) {
+    /**
+     * Constructor for User class.
+     * @param userName Unique username for the user
+     * @param password Password for the user
+     * @param phone Phone number for the user
+     * @param gmail Optional Gmail address for the user
+     */
+    public User(String userName, String password, int phone, String gmail) {
         this.userName = userName;
         this.password = password;
         this.phone = phone;
+        this.gmail = gmail;
     }
 
+    // GETTERS AND SETTERS
     public String getUserName() {
         return userName;
     }
@@ -49,4 +68,11 @@ public class User {
         this.phone = phone;
     }
 
+    public String getGmail() {
+        return gmail;
+    }
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
 }

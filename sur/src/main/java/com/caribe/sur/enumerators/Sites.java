@@ -1,4 +1,4 @@
- package com.caribe.sur.model.enumerators;
+ package com.caribe.sur.enumerators;
 
 public enum Sites {
 
