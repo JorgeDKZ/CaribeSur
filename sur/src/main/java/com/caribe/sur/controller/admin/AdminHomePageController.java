@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AdminHomePageController {
 
-    private final String ADMIN_HOME_PAGE = "AdminPages/AdminHomePage";
+    private final String URL_ADMIN_HOME_PAGE = "AdminHomePage";
+
+    private final String HTML_ADMIN_HOME_PAGE = "AdminPages/AdminHomePage";
 
 
-    @GetMapping("AdminHomePage")
+    @GetMapping(URL_ADMIN_HOME_PAGE)
     public String getMethodName(@RequestParam String param) {
         return ADMIN_HOME_PAGE;
     }

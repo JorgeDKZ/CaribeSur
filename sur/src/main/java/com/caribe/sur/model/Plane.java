@@ -6,8 +6,19 @@ import java.time.temporal.ChronoUnit;
 import com.caribe.sur.enumerators.Sites;
 import com.caribe.sur.enumerators.SizeOfPlane;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "planes")
 public class Plane {
     //ATRIBUTES
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
     //Places of the plane X = Long of the plane, Y = Place in the both sites
     private User[][] planeSeats;
 
@@ -112,5 +123,71 @@ public class Plane {
     public int getAvailableSeats() {
         return availableSeats;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setPlaneSeats(User[][] planeSeats) {
+        this.planeSeats = planeSeats;
+    }
+
+    public Sites getSiteStart() {
+        return siteStart;
+    }
+
+    public void setSiteStart(Sites siteStart) {
+        this.siteStart = siteStart;
+    }
+
+    public Sites getSiteEnd() {
+        return siteEnd;
+    }
+
+    public void setSiteEnd(Sites siteEnd) {
+        this.siteEnd = siteEnd;
+    }
+
+    public int getAllSeats() {
+        return allSeats;
+    }
+
+    public void setAllSeats(int allSeats) {
+        this.allSeats = allSeats;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getPriceSelecterSeat() {
+        return priceSelecterSeat;
+    }
+
+    public void setPriceSelecterSeat(float priceSelecterSeat) {
+        this.priceSelecterSeat = priceSelecterSeat;
+    }
+
+    public LocalDate getDateOfFlight() {
+        return dateOfFlight;
+    }
+
+    public void setDateOfFlight(LocalDate dateOfFlight) {
+        this.dateOfFlight = dateOfFlight;
+    }
+
+    
 
 }
