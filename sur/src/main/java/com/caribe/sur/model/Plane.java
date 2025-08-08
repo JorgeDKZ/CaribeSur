@@ -20,7 +20,7 @@ public class Plane {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     //Places of the plane X = Long of the plane, Y = Place in the both sites
-    private User[][] planeSeats;
+  //  private User[][] planeSeats;
 
     //Site where the plane starts
     private Sites siteStart;
@@ -42,8 +42,8 @@ public class Plane {
     //CONSTRUCTOR
     public Plane(SizeOfPlane size, Sites siteStart, Sites siteEnd, float price, float priceSelecterSeat, LocalDate dateOfFlight) {
         generateSize(size);
-        this.allSeats = planeSeats.length * planeSeats[0].length;
-        this.availableSeats = planeSeats.length * planeSeats[0].length;
+       // this.allSeats = planeSeats.length * planeSeats[0].length;
+       // this.availableSeats = planeSeats.length * planeSeats[0].length;
         this.siteStart = siteStart;
         this.siteEnd = siteEnd;
         this.price = price;
@@ -58,16 +58,16 @@ public class Plane {
     private void generateSize(SizeOfPlane size) {
         switch (size) {
             case SMALL:
-                planeSeats = new User[30][2];
+           //     planeSeats = new User[30][2];
                 break;
             case MEDIUM:
-                planeSeats = new User[40][2];
+             //   planeSeats = new User[40][2];
                 break;
             case LARGE:
-                planeSeats = new User[40][3];
+               // planeSeats = new User[40][3];
                 break;
             default:
-                planeSeats = new User[30][2];
+               // planeSeats = new User[30][2];
         }
 
     }
@@ -104,20 +104,20 @@ public class Plane {
     // If the seat is available, the user will be added to the seat
     public boolean addUserToSeat(int x, int y, User user) {
         // Check if the seat is available
-        if (planeSeats[x][y] == null) {
-            planeSeats[x][y] = user;
+    //    if (planeSeats[x][y] == null) {
+      //      planeSeats[x][y] = user;
             availableSeats--;
             return true; // User added successfully
         }
-        return false; // Seat is already taken
-    }
+        //return false; // Seat is already taken
+    //}
 
 
     //GETTERS AND SETTERS
     // Return the seats of the plane
-    public User[][] getPlaneSeats() {
-        return planeSeats;
-    }
+   // public User[][] getPlaneSeats() {
+      //  return planeSeats;
+   // }
 
     // Return the number of the seat are available
     public int getAvailableSeats() {
@@ -133,7 +133,7 @@ public class Plane {
     }
 
     public void setPlaneSeats(User[][] planeSeats) {
-        this.planeSeats = planeSeats;
+     //   this.planeSeats = planeSeats;
     }
 
     public Sites getSiteStart() {

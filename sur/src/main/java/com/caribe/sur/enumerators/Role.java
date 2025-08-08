@@ -1,10 +1,10 @@
 package com.caribe.sur.enumerators;
 
-public enum KindOfUsers {
+public enum Role {
     ADMIN("ADMIN"),
     USER("USER");
 
-    KindOfUsers(String string) {
+    Role(String string) {
         
     }
 }

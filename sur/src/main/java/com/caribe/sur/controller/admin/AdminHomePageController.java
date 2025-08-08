@@ -15,7 +15,7 @@ public class AdminHomePageController {
 
     @GetMapping(URL_ADMIN_HOME_PAGE)
     public String getMethodName(@RequestParam String param) {
-        return ADMIN_HOME_PAGE;
+        return HTML_ADMIN_HOME_PAGE;
     }
 
 }

@@ -21,6 +21,8 @@ public class User {
     private int phone;
     // Optional field for user's Gmail
     private String gmail;
+    // Role of the user, e.g., ADMIN, USER
+    private String role;
 
     // CONSTRUCTORS
     /**
@@ -34,12 +36,14 @@ public class User {
      * @param password Password for the user
      * @param phone Phone number for the user
      * @param gmail Optional Gmail address for the user
+     * @param role Role of the user (e.g., ADMIN, USER)
      */
-    public User(String userName, String password, int phone, String gmail) {
+    public User(String userName, String password, int phone, String gmail, String role) {
         this.userName = userName;
         this.password = password;
         this.phone = phone;
         this.gmail = gmail;
+        this.role = role;
     }
 
     // GETTERS AND SETTERS
@@ -74,5 +78,13 @@ public class User {
 
     public void setGmail(String gmail) {
         this.gmail = gmail;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class Register {
 
-    private final String URL_REGISTER = "/Register";
+    private final String URL_REGISTER = "/register";
     private final String URL_REDIRECT_HOMEPAGE = "redirect:HomePage";
 
     private final String HTML_REGISTER = "startPage/Register";

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LogIn {
 
-    private final String URL_LOGIN = "/Login";
+    private final String URL_LOGIN = "/login";
 
     private final String HTML_LOGIN = "startPage/Login";
     private final String HTML_USER_HOME_PAGE = "redirect:UserHomePage";

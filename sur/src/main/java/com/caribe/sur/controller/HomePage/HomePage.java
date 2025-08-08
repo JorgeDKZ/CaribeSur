@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 @Controller
 public class HomePage {
 
-    private final String URL_HOMEPAGE = "/HomePage";
+    private final String URL_HOMEPAGE = "/home";
 
     private final String HTML_HOMEPAGE = "startPage/HomePage";
 
