@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Welcome</title>
 </head>
+
 <body>
     <h1>Welcome to Caribe Sur</h1>
-    
-    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_REGISTER}" method="post">
+
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_REGISTER}"
+        method="post">
         <button type="submit">Register</button>
     </form>
     <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_LOGIN}" method="post">
         <button type="submit">Login</button>
     </form>
 </body>
+
 </html>

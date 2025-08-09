@@ -19,13 +19,13 @@ public class HomePage {
 
     @PostMapping(UrlFromPages.URL_POST_MOVE_TO_REGISTER)
     public String moveToRegister() {
-        
+
         return UrlFromPages.toRedirect(UrlFromPages.URL_REGISTER);
     }
-    
+
     @PostMapping(UrlFromPages.URL_POST_MOVE_TO_LOGIN)
     public String moveToLogin() {
-        
+
         return UrlFromPages.toRedirect(UrlFromPages.URL_LOGIN);
     }
 }

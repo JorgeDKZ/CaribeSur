@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.caribe.sur.model.User;
 
 @Repository
-public interface UsersRepository extends JpaRepository<User, String>{
+public interface UsersRepository extends JpaRepository<User, String> {
 
 }

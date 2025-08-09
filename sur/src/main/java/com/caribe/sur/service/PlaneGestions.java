@@ -21,10 +21,10 @@ public class PlaneGestions {
     public Plane findUserById(Long id) {
         return planesRepository.findById(id).orElse(null);
     }
-    
+
     public void deleteUser(Long id) {
         planesRepository.deleteById(id);
-    } 
+    }
 
     public List<Plane> getAllUsers() {
         return planesRepository.findAll();

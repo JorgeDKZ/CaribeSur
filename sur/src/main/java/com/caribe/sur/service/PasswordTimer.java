@@ -3,7 +3,7 @@ package com.caribe.sur.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PasswordTimer extends Thread{
+public class PasswordTimer extends Thread {
     // ATRIBUTES
     // Wait time in seconds
     private int waitTime = 0;
@@ -20,9 +20,9 @@ public class PasswordTimer extends Thread{
     // METHODS
     // decrease the timer every second
     // until it reaches 0
-    public void run(){
-        
-        while(waitTime > 0) {
+    public void run() {
+
+        while (waitTime > 0) {
             try {
                 Thread.sleep(SECONDS); // Sleep for 1 second
                 waitTime--;
@@ -35,7 +35,8 @@ public class PasswordTimer extends Thread{
     // Get the wait time in minutes
     // to show the user how long they have to wait
     public String getWaitTime() {
-        return waitTime / MINUTES + ":" + ((waitTime % MINUTES < 10) ? (waitTime % MINUTES) + "0" : (waitTime % MINUTES));
+        return waitTime / MINUTES + ":"
+                + ((waitTime % MINUTES < 10) ? (waitTime % MINUTES) + "0" : (waitTime % MINUTES));
     }
 
     // Check if the wait time is up

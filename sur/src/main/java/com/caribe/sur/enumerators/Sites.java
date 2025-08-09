@@ -1,4 +1,4 @@
- package com.caribe.sur.enumerators;
+package com.caribe.sur.enumerators;
 
 public enum Sites {
 
@@ -10,12 +10,12 @@ public enum Sites {
     EstadosUnidos("Estados Unidos");
 
     private final String sitio;
-    
+
     Sites(String sitio) {
         this.sitio = sitio;
     }
 
     public String getSitio() {
         return sitio;
-    }        
+    }
 }

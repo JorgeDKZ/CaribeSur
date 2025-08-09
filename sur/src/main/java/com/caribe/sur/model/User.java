@@ -28,15 +28,17 @@ public class User {
     /**
      * Default constructor for JPA.
      */
-    public User() {}
-    
+    public User() {
+    }
+
     /**
      * Constructor for User class.
+     * 
      * @param userName Unique username for the user
      * @param password Password for the user
-     * @param phone Phone number for the user
-     * @param gmail Optional Gmail address for the user
-     * @param role Role of the user (e.g., ADMIN, USER)
+     * @param phone    Phone number for the user
+     * @param gmail    Optional Gmail address for the user
+     * @param role     Role of the user (e.g., ADMIN, USER)
      */
     public User(String userName, String password, int phone, String gmail, String role) {
         this.userName = userName;
@@ -54,7 +56,6 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
 
     public String getPassword() {
         return password;

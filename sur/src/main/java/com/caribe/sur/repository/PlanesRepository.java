@@ -8,5 +8,4 @@ import com.caribe.sur.model.Plane;
 @Repository
 public interface PlanesRepository extends JpaRepository<Plane, Long> {
 
-    
 }

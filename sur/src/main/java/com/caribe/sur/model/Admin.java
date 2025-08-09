@@ -8,15 +8,14 @@ public class Admin {
     private static final Admin adminHomePage = null;
 
     // example password, should be securely managed
-    private String password = "admin123"; 
-
-    
+    private String password = "admin123";
 
     // CONSTRUCTOR
     // private constructor to prevent instantiation
     private Admin() {
-        
+
     }
+
     // METHODS
     // static method to provide access to the single instance
     public static Admin getInstance() {
@@ -33,11 +32,11 @@ public class Admin {
 
     // Change the password
     public boolean setPassword(String password) {
-        //Comprobe if
+        // Comprobe if
         // the password have 8 or more characters
         // at least one letter and one number
         Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$");
-        
+
         if (passwordPattern.matcher(password).matches()) {
             this.password = password;
             return true;
@@ -46,5 +45,4 @@ public class Admin {
         }
     }
 
-    
 }

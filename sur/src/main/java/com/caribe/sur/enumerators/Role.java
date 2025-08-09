@@ -5,6 +5,6 @@ public enum Role {
     USER("USER");
 
     Role(String string) {
-        
+
     }
 }
