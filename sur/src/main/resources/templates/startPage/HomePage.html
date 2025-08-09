@@ -6,7 +6,11 @@
 <body>
     <h1>Welcome to Caribe Sur</h1>
     
-    <button onclick="window.location.href='/Login'">Log in</button>
-    <button onclick="window.location.href='/Register'">Register</button>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_REGISTER}" method="post">
+        <button type="submit">Register</button>
+    </form>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_LOGIN}" method="post">
+        <button type="submit">Login</button>
+    </form>
 </body>
 </html>

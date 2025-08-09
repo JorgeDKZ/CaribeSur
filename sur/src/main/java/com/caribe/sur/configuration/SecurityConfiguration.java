@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import com.caribe.sur.enumerators.Role;
+import com.caribe.sur.enumerators.listFromClass.UrlFromPages;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +16,9 @@ public class SecurityConfiguration {
 
     private final String PATTERS_ADMIN = "/admin/**";
     private final String PATTERS_USER = "/user/**";
-    private final String [] PATTERS_PERMITALL = {"/home", "/login", "/register", "adminLogin"};
+    private final String [] PATTERS_PERMITALL = {UrlFromPages.URL_HOME_PAGE, UrlFromPages.URL_LOGIN, UrlFromPages.URL_REGISTER};
 
-    private final String HTML_LOGIN = "/login";
-
-    private final String URL_LOGIN_SUCCESS = "/home";
-    private final String URL_LOGOUT_SUCCESS = "/home";
-
-     private final UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     public SecurityConfiguration(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -35,16 +31,16 @@ public class SecurityConfiguration {
             .requestMatchers(PATTERS_ADMIN, PATTERS_USER).hasRole(Role.ADMIN.name())
             .requestMatchers(PATTERS_USER).hasRole(Role.USER.name())
             .requestMatchers(PATTERS_PERMITALL).permitAll()
-            .anyRequest().authenticated())
+            .anyRequest().permitAll())
             // Configure where to login and logout
             .formLogin(form -> form
-                .loginPage(HTML_LOGIN)
-                .failureUrl(HTML_LOGIN + "?error=true")
-                .defaultSuccessUrl(URL_LOGIN_SUCCESS, true) 
+                .loginPage(UrlFromPages.URL_LOGIN)
+                .failureUrl(UrlFromPages.URL_LOGIN + "?error=true")
+                .defaultSuccessUrl(UrlFromPages.URL_USER_HOME, true) 
                 .permitAll())
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl(URL_LOGOUT_SUCCESS)
+                .logoutSuccessUrl(UrlFromPages.URL_HOME_PAGE)
                 .permitAll());
 
         

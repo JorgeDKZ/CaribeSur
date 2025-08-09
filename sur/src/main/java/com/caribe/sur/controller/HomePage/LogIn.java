@@ -6,38 +6,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.caribe.sur.enumerators.listFromClass.HtmlFromPages;
+import com.caribe.sur.enumerators.listFromClass.UrlFromPages;
 import com.caribe.sur.model.User;
 import com.caribe.sur.service.UserGestions;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-
-
 @Controller
 public class LogIn {
-
-    private final String URL_LOGIN = "/login";
-
-    private final String HTML_LOGIN = "startPage/Login";
-    private final String HTML_USER_HOME_PAGE = "redirect:UserHomePage";
 
     @Autowired
     private UserGestions userGestions;
 
-    @GetMapping(URL_LOGIN)
+    @GetMapping(UrlFromPages.URL_LOGIN)
     public String getMethodName() {
-        return HTML_LOGIN; 
+        return HtmlFromPages.HTML_LOGIN; 
     }
     
-    @PostMapping(URL_LOGIN)
+    @PostMapping(UrlFromPages.URL_LOGIN)
     public String postMethodName(Model model, @ModelAttribute User user) {
     User userExist = userGestions.findUserById(user.getUserName());
 
    if(userExist != null && userExist.getPassword().equals(user.getPassword())) {
-       return HTML_USER_HOME_PAGE;
+       return UrlFromPages.toRedirect(UrlFromPages.URL_USER_HOME);
    } else {
-       return HTML_LOGIN;
+       return HtmlFromPages.HTML_LOGIN;
     }  
 
     }

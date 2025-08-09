@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+
 @Controller
 public class AdminHomePageController {
 
@@ -17,5 +18,8 @@ public class AdminHomePageController {
     public String getMethodName(@RequestParam String param) {
         return HTML_ADMIN_HOME_PAGE;
     }
+
+ 
+    
 
 }
