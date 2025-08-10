@@ -19,7 +19,9 @@
     <button>Restored with Security Copy</button>
     <button>Delete all data</button>
     <p>Log out</p>
-    <button>Log out</button>
+        <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_LOGOUT}" method="post">
+        <button type="submit">Register</button>
+        </form>
 </body>
 
 </html>

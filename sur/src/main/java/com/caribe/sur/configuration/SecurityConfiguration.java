@@ -42,7 +42,6 @@ public class SecurityConfiguration {
                                                 .defaultSuccessUrl(UrlFromPages.URL_COMPROBE_IF_ADMIN, true)
                                                 .permitAll())
                                 .logout(logout -> logout
-                                                .logoutUrl(UrlFromPages.URL_LOGOUT)
                                                 .logoutSuccessUrl(UrlFromPages.URL_HOME_PAGE)
                                                 .invalidateHttpSession(true)
                                                 .deleteCookies(DELETECOOKIES)

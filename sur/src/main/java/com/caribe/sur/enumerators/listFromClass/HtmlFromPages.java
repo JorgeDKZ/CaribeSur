@@ -4,6 +4,7 @@ public class HtmlFromPages {
     public static final String HTML_HOME_PAGE = "startPages/HomePage";
     public static final String HTML_REGISTER = "startPages/Register";
     public static final String HTML_LOGIN = "startPages/Login";
+    public static final String HTML_LOGOUT = "startPages/Logout";
 
     public static final String HTML_ERROR_ACCESS_DENIED = "errorPages/AccessDenied";
 
