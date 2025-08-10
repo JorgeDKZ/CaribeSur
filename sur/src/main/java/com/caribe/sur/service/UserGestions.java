@@ -40,6 +40,17 @@ public class UserGestions implements UserDetailsService {
         usersRepository.save(user);
     }
 
+    
+    public boolean changePassword(String userId, String newPassword) {
+        User user = findUserById(userId);
+        if (user != null) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            usersRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
     public User findUserById(String id) {
         return usersRepository.findById(id).orElse(null);
     }
