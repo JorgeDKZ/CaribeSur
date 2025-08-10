@@ -18,24 +18,26 @@ public class UserGestions implements UserDetailsService {
     private UsersRepository usersRepository;
     private PasswordEncoder passwordEncoder;
 
+    private static final String FIRST_USER_ID = "admin";
+    private static final String FIRST_USER_PASSWORD = "admin123";
+
     public UserGestions(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.passwordEncoder = passwordEncoder;
+
+        User firstUser = new User(FIRST_USER_ID, FIRST_USER_PASSWORD, Role.ADMIN.name());
+        saveAdmin(firstUser);
+    }
+
+    public void saveAdmin(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        usersRepository.save(user);
     }
 
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.USER.name()); // Default role, can be changed later
+        user.setRole(Role.USER.name());
         usersRepository.save(user);
-    }
-
-    public boolean isLogin(User user) {
-        User userExist = findUserById(user.getUserName());
-        if (userExist != null) {
-            return true;
-        }
-        return false;
-
     }
 
     public User findUserById(String id) {

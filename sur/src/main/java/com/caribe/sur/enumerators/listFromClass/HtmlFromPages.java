@@ -5,8 +5,12 @@ public class HtmlFromPages {
     public static final String HTML_REGISTER = "startPage/Register";
     public static final String HTML_LOGIN = "startPage/Login";
 
+    public static final String HTML_ERROR_ACCESS_DENIED = "errorPages/AccessDenied";
+
     public static final String HTML_ADMIN_HOME = "adminPage/AdminHome";
     public static final String HTML_ADMIN_LOGIN = "adminPage/AdminLogin";
+
+    public static final String HTML_USER_HOME = "userPages/UserHome";
 
     HtmlFromPages() {
     }

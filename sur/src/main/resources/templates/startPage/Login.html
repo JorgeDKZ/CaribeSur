@@ -9,7 +9,7 @@
     <h1>Log in with your user</h1>
     <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_LOGIN}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <input type="text" name="username" placeholder="Introduce a userName" required />
+        <input type="text" name="username" placeholder="Introduce a user name" required />
         <input type="password" name="password" placeholder="Introduce a password" required />
         <button type="submit">Login</button>
     </form>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Access Denied</title>
+</head>
+
+<body>
+    <h1>You don´t have access to this path</h1>
+
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_ERROR_ACCESS_DENIED}"method="post">
+        <button type="submit">Return to main menu</button>
+    </form>
+</body>
+
+</html>

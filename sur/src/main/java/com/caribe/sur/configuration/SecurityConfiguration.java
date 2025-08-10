@@ -29,20 +29,22 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Configure the security, including user roles and access permissions
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers(PATTERS_ADMIN, PATTERS_USER).hasRole(Role.ADMIN.name())
-                .requestMatchers(PATTERS_USER).hasRole(Role.USER.name())
+                .requestMatchers(PATTERS_ADMIN).hasRole(Role.ADMIN.name())
+                .requestMatchers(PATTERS_USER).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                 .requestMatchers(PATTERS_PERMITALL).permitAll()
                 .anyRequest().permitAll())
                 // Configure where to login and logout
                 .formLogin(form -> form
                         .loginPage(UrlFromPages.URL_LOGIN)
                         .failureUrl(UrlFromPages.URL_LOGIN)
-                        .defaultSuccessUrl(UrlFromPages.URL_USER_HOME, true)
+                        .defaultSuccessUrl(UrlFromPages.URL_COMPROBE_IF_ADMIN, true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl(UrlFromPages.URL_HOME_PAGE)
-                        .permitAll());
+                        .permitAll())
+                .exceptionHandling(ExceptionHandling -> ExceptionHandling
+                        .accessDeniedPage(UrlFromPages.URL_ERROR_ACCESS_DENIED));
 
         return http.build();
     }
