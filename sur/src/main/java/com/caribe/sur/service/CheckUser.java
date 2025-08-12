@@ -19,5 +19,13 @@ public class CheckUser {
         return false;
     }
 
-
+    public String getUserName(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        if(authentication != null && authentication.isAuthenticated()) {
+            System.out.println(authentication.getName());
+            return authentication.getName();
+        }
+        return null;
+    }
 }

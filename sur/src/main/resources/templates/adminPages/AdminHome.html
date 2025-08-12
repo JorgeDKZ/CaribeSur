@@ -10,17 +10,19 @@
 <body>
     <h2>Welcome administrator</h2>
     <p>Password</p>
-    <button>Change the password</button>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_ADMIN_CHANGE_PASSWORD}" method="post">
+        <button type="submit">Change password</button>
+    </form>
     <p>Gestions of planes</p>
     <button>Create new plane</button>
     <button>View the information of the planes</button>
     <p>Gestions of information</p>
-    <button>Security copy in local memory</button>
-    <button>Restored with Security Copy</button>
-    <button>Delete all data</button>
+      <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_ADMIN_SECURITY_COPY_LOCAL}" method="post">
+        <button type="submit">Manage information</button>
+        </form>
     <p>Log out</p>
         <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_LOGOUT}" method="post">
-        <button type="submit">Register</button>
+        <button type="submit">Logout</button>
         </form>
 </body>
 
