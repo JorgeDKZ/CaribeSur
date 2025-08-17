@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin information gestions</title>
+
+</head>
+
+<body>
+    <h2>Information gestions</h2>
+    <p>Create security copy</p>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_ADMIN_SECURITY_COPY_BACKUP}" method="post">
+        <button type="submit">Create copy security</button>
+    </form>
+    <p>Restore security copy</p>
+      <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_ADMIN_SECURITY_COPY_RESTORE_PATH}" method="post" enctype="multipart/form-data">
+        <p>Select the file to restore: <input type="file" id="file" name="file" accept=".json" required /></p>
+        <button type="submit">Restore security copy</button>
+      </form>
+</body>
+
+</html>

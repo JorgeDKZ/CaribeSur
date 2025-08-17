@@ -17,6 +17,9 @@ public class UrlFromPages {
     public static final String URL_ADMIN_HOME_PAGE = "/admin/home";
     public static final String URL_ADMIN_CHANGE_PASSWORD = "/admin/changePassword";
     public static final String URL_ADMIN_SECURITY_COPY = "/admin/security";
+    public static final String URL_ADMIN_API_SECURITY_COPY = "/admin/api/security";
+    public static final String URL_ADMIN_SECURITY_LOCAL_BACKUP = "/backup";
+    public static final String URL_ADMIN_SECURITY_LOCAL_BACKUP_PATH = URL_ADMIN_API_SECURITY_COPY + URL_ADMIN_SECURITY_LOCAL_BACKUP;
 
     public static final String URL_POST_MOVE_TO_ADMIN_CHANGE_PASSWORD = "/admin/post/moveToChangePassword";
     public static final String URL_POST_MOVE_TO_ADMIN_CREATE_NEW_PLANE = "/admin/post/createNewPlane";
@@ -24,6 +27,13 @@ public class UrlFromPages {
     public static final String URL_POST_MOVE_TO_ADMIN_SECURITY_COPY_LOCAL = "/admin/post/security";
     public static final String URL_POST_MOVE_TO_ADMIN_DELETE_ALL_DATA = "/admin/post/deleteAllData";
     public static final String URL_POST_ADMIN_CHANGE_PASSWORD = "/admin/changePassword";
+    public static final String URL_POST_ADMIN_SECURITY_COPY_BACKUP = "/admin/security/backup";
+    public static final String URL_POST_ADMIN_SECURITY_COPY_RESTORE = "/restore";
+    public static final String URL_ADMIN_SECURITY_COPY_RESTORE_PATH = URL_ADMIN_API_SECURITY_COPY + URL_POST_ADMIN_SECURITY_COPY_RESTORE;  
+ 
+
+    public static final String URL_POST_ADMIN_SECURITY_LOCAL_RESTORE = URL_ADMIN_API_SECURITY_COPY + "/restore";
+
 
     public static final String URL_USER_HOME = "/user/home";
 
