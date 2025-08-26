@@ -1,32 +1,39 @@
 package com.caribe.sur.model;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import com.caribe.sur.enumerators.Sites;
 import com.caribe.sur.enumerators.SizeOfPlane;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "planes")
+@Table(name = "Planes")
 public class Plane {
     // ATRIBUTES
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
-    // Places of the plane X = Long of the plane, Y = Place in the both sites
-    // private User[][] planeSeats;
+    public Long id;
+    // List of the ticket has this plane
+    @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> planeSeats;
 
     // Site where the plane starts
     private Sites siteStart;
     // Site where the plane going to end
     private Sites siteEnd;
 
+    // Columns of the plane
+    private int columns;
     // All seats of the plane
     private int allSeats;
     // Available seats of the plane
@@ -36,20 +43,22 @@ public class Plane {
     private float price;
     private float priceSelecterSeat;
 
-    // This date is the date when the plane will take off
-    private LocalDate dateOfFlight;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+    private String date;
 
     // CONSTRUCTOR
+    public Plane() {
+    }
+
     public Plane(SizeOfPlane size, Sites siteStart, Sites siteEnd, float price, float priceSelecterSeat,
-            LocalDate dateOfFlight) {
+            LocalDate localDateTime) {
         generateSize(size);
-        // this.allSeats = planeSeats.length * planeSeats[0].length;
-        // this.availableSeats = planeSeats.length * planeSeats[0].length;
+        availableSeats = allSeats;
         this.siteStart = siteStart;
         this.siteEnd = siteEnd;
         this.price = price;
         this.priceSelecterSeat = priceSelecterSeat;
-        this.dateOfFlight = dateOfFlight;
+        date = localDateTime.format(formatter);
 
     }
 
@@ -59,16 +68,20 @@ public class Plane {
     private void generateSize(SizeOfPlane size) {
         switch (size) {
             case SMALL:
-                // planeSeats = new User[30][2];
+                allSeats = 40;
+                columns = 4;
                 break;
             case MEDIUM:
-                // planeSeats = new User[40][2];
+                allSeats = 60;
+                columns = 4;
                 break;
             case LARGE:
-                // planeSeats = new User[40][3];
+                allSeats = 90;
+                columns = 6;
                 break;
             default:
-                // planeSeats = new User[30][2];
+                allSeats = 40;
+                columns = 4;
         }
 
     }
@@ -81,7 +94,7 @@ public class Plane {
     public float getPrice(Boolean isSelecterSeat) {
         float endPrice = (isSelecterSeat) ? priceSelecterSeat + price : price;
         float AvailablePercentage = getAvailablePorcentage();
-        long day = getDaysToFlight();
+        int day = getDaysToFly();
 
         endPrice += (AvailablePercentage < 20) ? endPrice * 0.15f : 0;
         endPrice += (day < 7) ? endPrice * 0.1f : 0;
@@ -91,49 +104,40 @@ public class Plane {
 
     }
 
+    private int getDaysToFly() {
+        LocalDate local = LocalDate.now();
+        LocalDate date = LocalDate.parse(this.date, formatter);
+        Period period;
+        try {
+            period = Period.between(local, date);
+        } catch (Exception e) {
+            return 0;
+        }
+
+        return period.getDays();
+    }
+
     // Return the available percentage of the plane
     private float getAvailablePorcentage() {
         return availableSeats / allSeats * 100;
     }
 
-    // Return the days to the flight
-    public long getDaysToFlight() {
-        return ChronoUnit.DAYS.between(LocalDate.now(), dateOfFlight);
-    }
 
-    // Add a user to a specific seat
-    // If the seat is available, the user will be added to the seat
-    public boolean addUserToSeat(int x, int y, User user) {
-        // Check if the seat is available
-        // if (planeSeats[x][y] == null) {
-        // planeSeats[x][y] = user;
-        availableSeats--;
-        return true; // User added successfully
-    }
-    // return false; // Seat is already taken
-    // }
-
-    // GETTERS AND SETTERS
-    // Return the seats of the plane
-    // public User[][] getPlaneSeats() {
-    // return planeSeats;
-    // }
-
-    // Return the number of the seat are available
-    public int getAvailableSeats() {
-        return availableSeats;
-    }
-
-    public long getId() {
+    //GETTERS AND SETTERS
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setPlaneSeats(User[][] planeSeats) {
-        // this.planeSeats = planeSeats;
+    public List<Ticket> getPlaneSeats() {
+        return planeSeats;
+    }
+
+    public void setPlaneSeats(List<Ticket> planeSeats) {
+        this.planeSeats = planeSeats;
     }
 
     public Sites getSiteStart() {
@@ -152,12 +156,24 @@ public class Plane {
         this.siteEnd = siteEnd;
     }
 
+    public int getColumns() {
+        return columns;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
+
     public int getAllSeats() {
         return allSeats;
     }
 
     public void setAllSeats(int allSeats) {
         this.allSeats = allSeats;
+    }
+
+    public int getAvailableSeats() {
+        return availableSeats;
     }
 
     public void setAvailableSeats(int availableSeats) {
@@ -180,12 +196,21 @@ public class Plane {
         this.priceSelecterSeat = priceSelecterSeat;
     }
 
-    public LocalDate getDateOfFlight() {
-        return dateOfFlight;
+    public static DateTimeFormatter getFormatter() {
+        return formatter;
     }
 
-    public void setDateOfFlight(LocalDate dateOfFlight) {
-        this.dateOfFlight = dateOfFlight;
+    public static void setFormatter(DateTimeFormatter formatter) {
+        Plane.formatter = formatter;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    
 }

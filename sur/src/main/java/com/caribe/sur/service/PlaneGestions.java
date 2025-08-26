@@ -14,7 +14,7 @@ public class PlaneGestions {
     @Autowired
     private PlanesRepository planesRepository;
 
-    public void saveUser(Plane Plane) {
+    public void savePlane(Plane Plane) {
         planesRepository.save(Plane);
     }
 
@@ -26,7 +26,7 @@ public class PlaneGestions {
         planesRepository.deleteById(id);
     }
 
-    public List<Plane> getAllUsers() {
+    public List<Plane> getAllPlanes() {
         return planesRepository.findAll();
     }
 

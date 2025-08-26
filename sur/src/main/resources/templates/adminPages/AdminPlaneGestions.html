@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+
+  <form th:if="${planes != null and !planes.isEmpty()}" th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_ADMIN_VIEW_INFORMATION_PLANE}" method="post">
+  <table>
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>ID</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Available Seats</th>
+        <th>Flight day</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="plane : ${planes}">
+        <td>
+          <input type="radio" name="id" th:value="${plane.id}" required />
+        </td>
+        <td th:text="${plane.id}"></td>
+        <td th:text="${plane.siteStart}"></td>
+        <td th:text="${plane.siteEnd}"></td>
+        <td th:text="${plane.availableSeats}"></td>
+        <td th:text="${plane.date}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="submit">Select Plane</button>
+</form>
+
+</body>
+
+</html>

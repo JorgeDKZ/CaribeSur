@@ -1,6 +1,8 @@
 package com.caribe.sur.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.caribe.sur.enumerators.Role;
+import com.caribe.sur.model.Ticket;
 import com.caribe.sur.model.User;
 import com.caribe.sur.repository.UsersRepository;
 
@@ -53,6 +56,14 @@ public class UserGestions implements UserDetailsService {
 
     public User findUserById(String id) {
         return usersRepository.findById(id).orElse(null);
+    }
+
+    public List<User> findUsersByTickets(List<Ticket> tickets) {
+        Set <User> userIds = tickets.stream().map(Ticket::getPassenger).collect(Collectors.toSet()); 
+
+        return usersRepository.findAll().stream()
+                .filter(user -> userIds.contains(user))
+                .toList();
     }
 
     public void deleteUser(String id) {

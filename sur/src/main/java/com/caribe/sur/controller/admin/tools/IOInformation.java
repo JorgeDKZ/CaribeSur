@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.caribe.sur.enumerators.listFromClass.UrlFromPages;
 import com.caribe.sur.model.Backup;
 import com.caribe.sur.repository.PlanesRepository;
+import com.caribe.sur.repository.TicketRepository;
 import com.caribe.sur.repository.UsersRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +21,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(UrlFromPages.URL_ADMIN_API_SECURITY_COPY)
@@ -29,13 +29,15 @@ public class IOInformation {
     private PlanesRepository planesRepository;
     @Autowired
     private UsersRepository userRepository;
+    @Autowired
+    private TicketRepository ticketRepository;
 
     @GetMapping(UrlFromPages.URL_ADMIN_SECURITY_LOCAL_BACKUP)
     public ResponseEntity<Resource> backupInformation() throws JsonProcessingException {
         Backup backup = new Backup();
         backup.setPlanes(planesRepository.findAll());
         backup.setUsers(userRepository.findAll());
-
+        backup.setTickets(ticketRepository.findAll());
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonBackup = objectMapper.writeValueAsString(backup);
 
@@ -57,9 +59,11 @@ public class IOInformation {
 
             planesRepository.deleteAll();
             userRepository.deleteAll();
+            ticketRepository.deleteAll();
 
             planesRepository.saveAll(backup.getPlanes());
             userRepository.saveAll(backup.getUsers());
+            ticketRepository.saveAll(backup.getTickets());
 
             return ResponseEntity.ok("Backup restored successfully");
         } catch (Exception e) {

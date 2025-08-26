@@ -25,4 +25,14 @@ public class AdminHomePageController {
         return UrlFromPages.toRedirect(UrlFromPages.URL_ADMIN_SECURITY_COPY);
     }
 
+    @PostMapping(UrlFromPages.URL_POST_MOVE_TO_ADMIN_NEW_PLANE)
+    public String postNewPlanes() {
+        return UrlFromPages.toRedirect(UrlFromPages.URL_ADMIN_PLANES_NEW_PLANES);
+    }
+
+    @PostMapping(UrlFromPages.URL_POST_MOVE_TO_ADMIN_INFORMATION_PLANE)
+    public String postInformationPlane() {
+        return UrlFromPages.toRedirect(UrlFromPages.URL_ADMIN_PLANES_INFORMATION_PLANES);
+    }
+
 }

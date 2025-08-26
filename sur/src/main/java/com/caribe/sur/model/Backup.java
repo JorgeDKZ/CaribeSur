@@ -6,6 +6,7 @@ public class Backup {
 
     private List<Plane> planes;
     private List<User> users;
+    private List<Ticket> tickets;
 
     public Backup() {}
 
@@ -25,5 +26,11 @@ public class Backup {
     }
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

@@ -14,8 +14,12 @@
         <button type="submit">Change password</button>
     </form>
     <p>Gestions of planes</p>
-    <button>Create new plane</button>
-    <button>View the information of the planes</button>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_ADMIN_NEW_PLANE}" method="post">
+        <button type="submit">Create new plane</button>
+        </form>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_ADMIN_INFORMATION_PLANE}" method="post">
+        <button type="submit">See the information of the planes</button>
+        </form>
     <p>Gestions of information</p>
       <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_ADMIN_SECURITY_COPY_LOCAL}" method="post">
         <button type="submit">Manage information</button>

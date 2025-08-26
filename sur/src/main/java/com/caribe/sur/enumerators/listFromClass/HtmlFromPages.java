@@ -12,6 +12,8 @@ public class HtmlFromPages {
     public static final String HTML_ADMIN_LOGIN = "adminPages/AdminLogin";
     public static final String HTML_ADMIN_CHANGE_PASSWORD = "adminPages/AdminChangePassword";
     public static final String HTML_ADMIN_SECURITY = "adminPages/AdminSecurity";
+    public static final String HTML_ADMIN_NEW_PLANE_GESTIONS = "adminPages/AdminNewPlaneGestions";
+    public static final String HTML_ADMIN_PLANE_GESTIONS = "adminPages/AdminPlaneGestions";
 
     public static final String HTML_USER_HOME = "userPages/UserHome";
 

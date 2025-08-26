@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
  * User model class representing a user in the system.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 public class User {
 
     // ATRIBUTES
