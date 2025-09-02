@@ -21,14 +21,18 @@ public class UserGestions implements UserDetailsService {
     private UsersRepository usersRepository;
     private PasswordEncoder passwordEncoder;
 
-    private static final String FIRST_USER_ID = "admin";
-    private static final String FIRST_USER_PASSWORD = "admin123";
+    private static final String FIRST_ADMIN_ID = "admin";
+    private static final String FIRST_ADMIN_PASSWORD = "admin123";
+
+    private static final String FIRST_USER_ID = "user";
+    private static final String FIRST_USER_PASSWORD = "user123";
 
     public UserGestions(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.passwordEncoder = passwordEncoder;
 
-        User firstUser = new User(FIRST_USER_ID, FIRST_USER_PASSWORD, Role.ADMIN.name());
+        User firstUser = new User(FIRST_ADMIN_ID, FIRST_ADMIN_PASSWORD, Role.ADMIN.name());
+        saveUser(new User(FIRST_USER_ID, FIRST_USER_PASSWORD, Role.USER.name()));
         saveAdmin(firstUser);
     }
 

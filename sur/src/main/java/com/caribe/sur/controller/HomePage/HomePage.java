@@ -28,4 +28,10 @@ public class HomePage {
 
         return UrlFromPages.toRedirect(UrlFromPages.URL_LOGIN);
     }
+
+
+    @PostMapping(UrlFromPages.URL_HOME_PAGE)
+    public String moteToHomePage() {
+        return UrlFromPages.toRedirect(UrlFromPages.URL_HOME_PAGE);
+    }
 }

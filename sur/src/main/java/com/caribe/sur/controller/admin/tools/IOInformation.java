@@ -67,6 +67,7 @@ public class IOInformation {
 
             return ResponseEntity.ok("Backup restored successfully");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(500).body("The file is not a valid backup");
         }
 

@@ -1,7 +1,13 @@
 package com.caribe.sur.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -23,6 +29,10 @@ public class User {
     private String gmail;
     // Role of the user, e.g., ADMIN, USER
     private String role;
+    // List of the ticket has this user
+    @OneToMany(mappedBy = "passenger", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("User")
+    private List<Ticket> myTickets;
 
     // CONSTRUCTORS
     /**
@@ -31,7 +41,7 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String password,String role) {
+    public User(String userName, String password, String role) {
         this.userName = userName;
         this.password = password;
         this.role = role;
@@ -52,6 +62,10 @@ public class User {
         this.phone = phone;
         this.gmail = gmail;
         this.role = role;
+    }
+
+    public void addTicket(Ticket ticket) {
+        myTickets.add(ticket);
     }
 
     // GETTERS AND SETTERS
@@ -94,4 +108,13 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public List<Ticket> getMyTickets() {
+        return myTickets;
+    }
+
+    public void setMyTickets(List<Ticket> myTickets) {
+        this.myTickets = myTickets;
+    }
+
 }

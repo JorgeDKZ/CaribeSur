@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+</head>
+
+<body>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_USER_TO_SEE_FLIGHT}" method="post">
+        <button type="submit">See flight</button>
+    </form>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_USER_TO_SEE_TICKETS}" method="post">
+        <button type="submit">See tickets</button>
+    </form>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_USER_TO_CHANGE_PASSWORD}"
+        method="post">
+        <button type="submit">Change password</button>
+    </form>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_LOGOUT}" method="post">
+        <button type="submit">Log out</button>
+    </form>
+</body>
+
+</html>

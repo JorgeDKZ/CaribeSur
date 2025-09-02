@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_USER_SELECTED_PLANE}" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>ID</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Available Seats</th>
+                    <th>Flight day</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="plane : ${planes}">
+                    <td>
+                        <input type="radio" name="plane" th:value="${plane.id}" required />
+                    </td>
+                    <td th:text="${plane.id}"></td>
+                    <td th:text="${plane.siteStart}"></td>
+                    <td th:text="${plane.siteEnd}"></td>
+                    <td th:text="${plane.availableSeats}"></td>
+                    <td th:text="${plane.date}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Select plane</button>
+    </form>
+    <table style="border-collapse: collapse; margin:20px auto;">
+        <tbody>
+            <tr th:each="row, rowCount : ${sites}">
+                <td th:each="site, colCount : ${row}" style="padding:5px; text-align:center;">
+
+                    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_USER_SELECTED_SEAT}"
+                        method="post">
+                        <button type="submit" name="seatPosition"
+                            th:value="${id + '-' + rowCount.index + '-' + colCount.index}"
+                            style="width:60px; height:60px; background-color:lightblue; border-radius:8px; border:1px solid #444; cursor:pointer;">
+                            <span th:text="${site}"></span>
+                        </button>
+                    </form>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_USER_TO_HOMEPAGE}" method="post">
+        <button type="submit">Home page</button>
+    </form>
+</body>
+
+</html>

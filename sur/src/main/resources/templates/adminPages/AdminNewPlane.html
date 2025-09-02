@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -8,7 +9,34 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
 </head>
+
 <body>
+    <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_ADMIN_CREATE_NEW_PLANE}"
+        method="post">
+        Size of the plane:
+        <select name="size">
+            <option th:each="size : ${sizeOfPlane}" th:text="${size}"></option>
+        </select>
+        To from:
+        <select name="from">
+            <option th:each="site : ${sites}" th:text="${site}"></option>
+        </select>
+        To go:
+        <select name="to">
+            <option th:each="site : ${sites}" th:text="${site}"></option>
+        </select>
+        Price of the ticket:
+        <input type="number" name="price" required>
+        Price of the selected site:
+        <input type="number" name="selectedPrice" required>
+        Date to fly:
+        <input type="date" name="dateToFly" required>
+        <button type="submit">Select plane</button>
+    </form>
+
     
+
+
 </body>
+
 </html>

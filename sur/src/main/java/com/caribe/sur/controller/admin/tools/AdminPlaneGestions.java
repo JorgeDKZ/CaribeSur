@@ -1,12 +1,16 @@
 package com.caribe.sur.controller.admin.tools;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.caribe.sur.enumerators.Sites;
+import com.caribe.sur.enumerators.SizeOfPlane;
 import com.caribe.sur.enumerators.listFromClass.HtmlFromPages;
 import com.caribe.sur.enumerators.listFromClass.ModelAtributesVariables;
 import com.caribe.sur.enumerators.listFromClass.UrlFromPages;
@@ -30,8 +34,21 @@ public class AdminPlaneGestions {
     UserGestions userGestions;
 
     @GetMapping(UrlFromPages.URL_ADMIN_PLANES_NEW_PLANES)
-    public String getNewPlanes() {
+    public String getNewPlanes(Model model) {
 
+        model.addAttribute(ModelAtributesVariables.SIZE_PLANE, SizeOfPlane.values());
+        model.addAttribute(ModelAtributesVariables.SITE, Sites.values());
+        return HtmlFromPages.HTML_ADMIN_NEW_PLANE_GESTIONS;
+    }
+
+    @PostMapping(UrlFromPages.URL_POST_ADMIN_CREATE_NEW_PLANE)
+    public String postNewPlane(Model model, @ModelAttribute Plane plane, @RequestParam SizeOfPlane size, @RequestParam Sites to,
+            @RequestParam Sites from, @RequestParam int price, @RequestParam int selectedPrice,
+            @RequestParam LocalDate dateToFly) {
+        
+        planeGestions.savePlane(new Plane(size, from, to,price, selectedPrice, dateToFly));
+        model.addAttribute(ModelAtributesVariables.SIZE_PLANE, SizeOfPlane.values());
+        model.addAttribute(ModelAtributesVariables.SITE, Sites.values());
         return HtmlFromPages.HTML_ADMIN_NEW_PLANE_GESTIONS;
     }
 
@@ -47,7 +64,10 @@ public class AdminPlaneGestions {
     public String postViewInformationPlanes(Model model, @RequestParam long id) {
 
         List<Ticket> tickets = ticketGestions.findTicketWithPlane(id);
+        List<Plane> planes = planeGestions.getAllPlanes();
+        model.addAttribute(ModelAtributesVariables.PLANE, planes);
         if (tickets.isEmpty()) {
+
             return HtmlFromPages.HTML_ADMIN_PLANE_GESTIONS;
         } else {
             List<User> users;

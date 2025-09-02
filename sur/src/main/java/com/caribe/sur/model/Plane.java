@@ -5,8 +5,11 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.caribe.sur.enumerators.Seats;
 import com.caribe.sur.enumerators.Sites;
 import com.caribe.sur.enumerators.SizeOfPlane;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,6 +28,7 @@ public class Plane {
     public Long id;
     // List of the ticket has this plane
     @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("Plane")
     private List<Ticket> planeSeats;
 
     // Site where the plane starts
@@ -91,6 +95,8 @@ public class Plane {
     // If have a few days to the flight, the price will be increased
     // If the plane is almost full, the price will be increased
     // If the plane is empty the price will drop
+
+    @JsonIgnore
     public float getPrice(Boolean isSelecterSeat) {
         float endPrice = (isSelecterSeat) ? priceSelecterSeat + price : price;
         float AvailablePercentage = getAvailablePorcentage();
@@ -104,6 +110,7 @@ public class Plane {
 
     }
 
+    @JsonIgnore
     private int getDaysToFly() {
         LocalDate local = LocalDate.now();
         LocalDate date = LocalDate.parse(this.date, formatter);
@@ -122,8 +129,41 @@ public class Plane {
         return availableSeats / allSeats * 100;
     }
 
+    @JsonIgnore
+    public Seats[][] getSeats() {
+        Seats[][] seats = getDefaultSeats();
 
-    //GETTERS AND SETTERS
+        for (int x = 0; x < planeSeats.size(); x++) {
+
+            seats[planeSeats.get(x).getRows()][planeSeats.get(x).getColums()] = Seats.NOT_AVALIABLE;
+        }
+
+        return seats;
+    }
+
+    @JsonIgnore
+    private Seats[][] getDefaultSeats() {
+        Seats[][] seats = new Seats[allSeats / columns][columns];
+
+        for (int x = 0; x < seats.length; x++) {
+            for (int y = 0; y < seats[0].length; y++) {
+                seats[x][y] = Seats.AVALIABLE;
+            }
+        }
+
+        return seats;
+    }
+
+    public boolean isAvaliableSeat(int rows, int columns) {
+        return !planeSeats.stream().anyMatch(
+                (ticket -> ticket.getColums() == columns && ticket.getRows() == rows));
+    }
+
+    public void addTicket(Ticket ticket) {
+        planeSeats.add(ticket);
+    }
+
+    // GETTERS AND SETTERS
     public Long getId() {
         return id;
     }
@@ -212,5 +252,4 @@ public class Plane {
         this.date = date;
     }
 
-    
 }

@@ -40,5 +40,5 @@ public class TicketGestions {
         return ticketRepository.findAll().stream()
                 .filter(ticket -> ticket.getPlane().getId() == planeId)
                 .toList();
-    }
+     }
 }

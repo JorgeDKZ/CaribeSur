@@ -1,5 +1,7 @@
 package com.caribe.sur.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,10 +23,12 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "Users")
+    @JsonBackReference("User")
     private User passenger;
 
     @ManyToOne
     @JoinColumn(name = "Planes")
+    @JsonBackReference("Plane")
     private Plane plane;
 
     public Ticket() {

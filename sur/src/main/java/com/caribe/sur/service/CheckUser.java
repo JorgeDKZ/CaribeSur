@@ -9,21 +9,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckUser {
 
-    public boolean isUserAdmin(){
+    public boolean isUserAdmin() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
-        if(authentication != null && authentication.isAuthenticated()) {
+
+        if (authentication != null && authentication.isAuthenticated()) {
             return authentication.getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_" + Role.ADMIN.name()));
         }
         return false;
     }
 
-    public String getUserName(){
+    public String getUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
-        if(authentication != null && authentication.isAuthenticated()) {
-            System.out.println(authentication.getName());
+
+        if (authentication != null && authentication.isAuthenticated()) {
             return authentication.getName();
         }
         return null;
