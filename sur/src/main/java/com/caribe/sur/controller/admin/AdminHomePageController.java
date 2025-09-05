@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.caribe.sur.enumerators.listFromClass.HtmlFromPages;
 import com.caribe.sur.enumerators.listFromClass.UrlFromPages;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class AdminHomePageController {
@@ -33,6 +34,12 @@ public class AdminHomePageController {
     @PostMapping(UrlFromPages.URL_POST_MOVE_TO_ADMIN_INFORMATION_PLANE)
     public String postInformationPlane() {
         return UrlFromPages.toRedirect(UrlFromPages.URL_ADMIN_PLANES_INFORMATION_PLANES);
+    }
+
+    @PostMapping(UrlFromPages.URL_POST_MOVE_TO_HOME)
+    public String postMoveToHome() {
+
+        return UrlFromPages.toRedirect(UrlFromPages.URL_ADMIN_HOME_PAGE);
     }
 
 }

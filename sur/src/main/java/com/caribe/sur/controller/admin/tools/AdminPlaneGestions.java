@@ -42,11 +42,12 @@ public class AdminPlaneGestions {
     }
 
     @PostMapping(UrlFromPages.URL_POST_ADMIN_CREATE_NEW_PLANE)
-    public String postNewPlane(Model model, @ModelAttribute Plane plane, @RequestParam SizeOfPlane size, @RequestParam Sites to,
+    public String postNewPlane(Model model, @ModelAttribute Plane plane, @RequestParam SizeOfPlane size,
+            @RequestParam Sites to,
             @RequestParam Sites from, @RequestParam int price, @RequestParam int selectedPrice,
             @RequestParam LocalDate dateToFly) {
-        
-        planeGestions.savePlane(new Plane(size, from, to,price, selectedPrice, dateToFly));
+
+        planeGestions.savePlane(new Plane(size, from, to, price, selectedPrice, dateToFly));
         model.addAttribute(ModelAtributesVariables.SIZE_PLANE, SizeOfPlane.values());
         model.addAttribute(ModelAtributesVariables.SITE, Sites.values());
         return HtmlFromPages.HTML_ADMIN_NEW_PLANE_GESTIONS;
@@ -63,19 +64,11 @@ public class AdminPlaneGestions {
     @PostMapping(UrlFromPages.URL_POST_MOVE_TO_ADMIN_VIEW_INFORMATION_PLANE)
     public String postViewInformationPlanes(Model model, @RequestParam long id) {
 
-        List<Ticket> tickets = ticketGestions.findTicketWithPlane(id);
+        List<Ticket> tickets = planeGestions.findUserById(id).getPlaneSeats();
         List<Plane> planes = planeGestions.getAllPlanes();
         model.addAttribute(ModelAtributesVariables.PLANE, planes);
-        if (tickets.isEmpty()) {
-
-            return HtmlFromPages.HTML_ADMIN_PLANE_GESTIONS;
-        } else {
-            List<User> users;
-            users = userGestions.findUsersByTickets(tickets);
-            model.addAttribute(ModelAtributesVariables.USER, users);
-            return HtmlFromPages.HTML_ADMIN_PLANE_GESTIONS;
-        }
-
+        model.addAttribute(ModelAtributesVariables.TICKETS, tickets);
+        return HtmlFromPages.HTML_ADMIN_PLANE_GESTIONS;
     }
 
 }

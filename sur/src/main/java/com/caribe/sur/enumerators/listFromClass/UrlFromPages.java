@@ -28,6 +28,7 @@ public class UrlFromPages {
     public static final String URL_ADMIN_PLANES_ = "/admin/post/planes";
 
     // Post from the admin pages
+    public static final String URL_POST_MOVE_TO_HOME = "/admin/post/home";
     public static final String URL_POST_MOVE_TO_ADMIN_CHANGE_PASSWORD = "/admin/post/moveToChangePassword";
     public static final String URL_POST_MOVE_TO_ADMIN_NEW_PLANE = "/admin/post/newPlane";
     public static final String URL_POST_ADMIN_CREATE_NEW_PLANE = "/admin/post/createNewPlane";
@@ -47,7 +48,6 @@ public class UrlFromPages {
     public static final String URL_USER_FLIGHT = "/user/seeFlight";
     public static final String URL_USER_SEE_TICKETS = "/user/seeTickets";
     public static final String URL_USER_CHANGE_PASSWORD = "/user/changePassword";
-    
 
     // Post from the user pages
     public static final String URL_USER_TO_SEE_FLIGHT = "/user/post/seeFlight";
@@ -64,8 +64,6 @@ public class UrlFromPages {
 
     // Post from the error pages
     public static final String URL_POST_ERROR_ACCESS_DENIED = "/accessDenied";
-
-    
 
     UrlFromPages() {
     }

@@ -2,43 +2,72 @@
 <html>
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
 </head>
 
 <body>
 
-  <form th:if="${planes != null and !planes.isEmpty()}" th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_ADMIN_CREATE_NEW_PLANE}" method="post">
-  <table>
+  <P th:if="${planes == null or planes.isEmpty()}">Have no one plane</P>
+  <form th:if="${planes != null and !planes.isEmpty()}"
+    th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_ADMIN_VIEW_INFORMATION_PLANE}"
+    method="post">
+    <table>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Plane id</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Available Seats</th>
+          <th>Flight day</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="plane : ${planes}">
+          <td>
+            <input type="radio" name="id" th:value="${plane.id}" required />
+          </td>
+          <td th:text="${plane.id}"></td>
+          <td th:text="${plane.siteStart}"></td>
+          <td th:text="${plane.siteEnd}"></td>
+          <td th:text="${plane.availableSeats}"></td>
+          <td th:text="${plane.date}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Select Plane</button>
+  </form>
+  <table th:if="${tickets != null and !tickets.isEmpty()}">
     <thead>
       <tr>
-        <th>Select</th>
-        <th>ID</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Available Seats</th>
+        <th>Ticket id</th>
+        <th>Passager</th>
+        <th>Plane</th>
+        <th>Seat</th>
+        <th>From - To</th>
         <th>Flight day</th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each="plane : ${planes}">
-        <td>
-          <input type="radio" name="id" th:value="${plane.id}" required />
-        </td>
-        <td th:text="${plane.id}"></td>
-        <td th:text="${plane.siteStart}"></td>
-        <td th:text="${plane.siteEnd}"></td>
-        <td th:text="${plane.availableSeats}"></td>
-        <td th:text="${plane.date}"></td>
+      <tr th:each="ticket : ${tickets}">
+        <td th:text="${ticket.id}"></td>
+        <td th:text="${ticket.passenger.userName}"></td>
+        <td th:text="${ticket.plane.id}"></td>
+        <td th:text="|Rows: ${ticket.rows} , Column: ${ticket.colums}|"></td>
+        <td th:text="|${ticket.plane.siteStart} - ${ticket.plane.siteEnd}|"></td>
+        <td th:text="${ticket.plane.date}"></td>
       </tr>
     </tbody>
   </table>
-  <button type="submit">Select Plane</button>
-</form>
-
+  <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_POST_MOVE_TO_HOME}" method="post">
+    <button type="submit">
+      Back to home
+    </button>
+  </form>
 </body>
 
 </html>
