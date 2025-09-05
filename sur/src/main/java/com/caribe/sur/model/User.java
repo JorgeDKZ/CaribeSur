@@ -68,6 +68,10 @@ public class User {
         myTickets.add(ticket);
     }
 
+    public void deleteTicket(Ticket ticket){
+        myTickets.remove(ticket);
+    }
+
     // GETTERS AND SETTERS
     public String getUserName() {
         return userName;

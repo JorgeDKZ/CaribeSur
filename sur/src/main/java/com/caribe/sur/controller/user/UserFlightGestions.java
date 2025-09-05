@@ -63,15 +63,12 @@ public class UserFlightGestions {
             tickets.saveTicket(createTicket);
             user.addTicket(createTicket);
             selectedPlane.addTicket(createTicket);
-            
-        } else {
 
         }
         model.addAttribute(ModelAtributesVariables.PLANE, planes.getAllPlanes());
         model.addAttribute(ModelAtributesVariables.SITE, selectedPlane.getSeats());
         model.addAttribute(ModelAtributesVariables.PLANE_SELECTED, selectedPlane);
         return HtmlFromPages.HTML_USER_FLIGHT;
-
     }
 
 }

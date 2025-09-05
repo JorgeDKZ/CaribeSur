@@ -27,8 +27,14 @@ public class UserHomePage {
         return UrlFromPages.toRedirect(UrlFromPages.URL_USER_SEE_TICKETS);
     }
 
-    @PostMapping(UrlFromPages.URL_USER_TO_HOMEPAGE)
+    @PostMapping(UrlFromPages.URL_USER_TO_CHANGE_PASSWORD)
     public String postMoveToChangePassword() {
+
+        return UrlFromPages.toRedirect(UrlFromPages.URL_USER_CHANGE_PASSWORD);
+    }
+
+    @PostMapping(UrlFromPages.URL_USER_TO_HOMEPAGE)
+    public String postMoveToHomePage() {
 
         return UrlFromPages.toRedirect(UrlFromPages.URL_USER_HOME);
     }

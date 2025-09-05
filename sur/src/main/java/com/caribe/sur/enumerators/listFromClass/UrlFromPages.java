@@ -47,19 +47,24 @@ public class UrlFromPages {
     public static final String URL_USER_FLIGHT = "/user/seeFlight";
     public static final String URL_USER_SEE_TICKETS = "/user/seeTickets";
     public static final String URL_USER_CHANGE_PASSWORD = "/user/changePassword";
+    
 
     // Post from the user pages
     public static final String URL_USER_TO_SEE_FLIGHT = "/user/post/seeFlight";
     public static final String URL_USER_TO_HOMEPAGE = "/user/post/homePage";
     public static final String URL_USER_TO_SEE_TICKETS = "/user/post/seeTickets";
-    public static final String URL_USER_TO_CHANGE_PASSWORD = "/user/post/changePassword";
+    public static final String URL_USER_TO_CHANGE_PASSWORD = "/user/post/toChangePassword";
     public static final String URL_USER_SELECTED_PLANE = "/user/post/selectedPlane";
     public static final String URL_USER_SELECTED_SEAT = "/user/post/selectedSeat";
+    public static final String URL_USER_POST_DELETE_TICKETS = "/user/post/deleteTicket";
+    public static final String URL_USER_POST_CHANGE_PASSWORD = "/user/post/changePassword";
+
     // Url from the error pages
     public static final String URL_ERROR_ACCESS_DENIED = "/accessDenied";
 
     // Post from the error pages
     public static final String URL_POST_ERROR_ACCESS_DENIED = "/accessDenied";
+
     
 
     UrlFromPages() {

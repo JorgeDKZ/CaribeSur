@@ -6,14 +6,13 @@ import com.caribe.sur.enumerators.listFromClass.HtmlFromPages;
 import com.caribe.sur.enumerators.listFromClass.UrlFromPages;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomePage {
 
     @GetMapping(UrlFromPages.URL_HOME_PAGE)
-    public String getMethod(Model model) {
+    public String getMethod() {
         return HtmlFromPages.HTML_HOME_PAGE;
     }
 
@@ -22,16 +21,10 @@ public class HomePage {
 
         return UrlFromPages.toRedirect(UrlFromPages.URL_REGISTER);
     }
-
+    
     @PostMapping(UrlFromPages.URL_POST_MOVE_TO_LOGIN)
     public String moveToLogin() {
 
         return UrlFromPages.toRedirect(UrlFromPages.URL_LOGIN);
-    }
-
-
-    @PostMapping(UrlFromPages.URL_HOME_PAGE)
-    public String moteToHomePage() {
-        return UrlFromPages.toRedirect(UrlFromPages.URL_HOME_PAGE);
     }
 }

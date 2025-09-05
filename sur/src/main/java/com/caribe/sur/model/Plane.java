@@ -163,6 +163,10 @@ public class Plane {
         planeSeats.add(ticket);
     }
 
+    public void deleteTicket(Ticket ticket) {
+        planeSeats.remove(ticket);
+    }
+
     // GETTERS AND SETTERS
     public Long getId() {
         return id;

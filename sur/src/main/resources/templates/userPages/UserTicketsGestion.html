@@ -12,27 +12,37 @@
 
 <body>
     <p th:if="${#lists.isEmpty(tickets)}">You have no tickets</p>
-
-    <table th:if="${!#lists.isEmpty(tickets)}">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Passenger</th>
-                <th>Plane Number</th>
-                <th>From - To</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="ticket : ${tickets}">
-                <td th:text="${ticket.id}"></td>
-                <td th:text="${ticket.passenger.userName}"></td> <!-- corregido -->
-                <td th:text="${ticket.plane.id}"></td>
-                <td th:text="|${ticket.plane.siteStart} - ${ticket.plane.siteEnd}|"></td>
-                <td th:text="${ticket.plane.date}"></td>
-            </tr>
-        </tbody>
-    </table>
+    <form th:if="${!#lists.isEmpty(tickets)}"
+        th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_USER_POST_DELETE_TICKETS}"
+        method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>ID</th>
+                    <th>Passenger</th>
+                    <th>Plane Number</th>
+                    <th>From - To</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td>
+                        <input type="radio" name="ticketId" th:value="${ticket.id}" required>
+                    </td>
+                    <td th:text="${ticket.id}"></td>
+                    <td th:text="${ticket.passenger.userName}"></td>
+                    <td th:text="${ticket.plane.id}"></td>
+                    <td th:text="|${ticket.plane.siteStart} - ${ticket.plane.siteEnd}|"></td>
+                    <td th:text="${ticket.plane.date}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">
+            Borrar ticket
+        </button>
+    </form>
     <form th:action="${T(com.caribe.sur.enumerators.listFromClass.UrlFromPages).URL_USER_TO_HOMEPAGE}" method="post">
         <button type="submit">Home page</button>
     </form>

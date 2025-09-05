@@ -18,6 +18,7 @@ public class HtmlFromPages {
     public static final String HTML_USER_HOME = "userPages/UserHome";
     public static final String HTML_USER_FLIGHT = "userPages/UserPlaneGestions";
     public static final String HTML_USER_TICKETS = "userPages/UserTicketsGestion";
+    public static final String HTML_USER_CHANGE_PASSWORD = "userPages/UserChangePassword";
 
     HtmlFromPages() {
     }

@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Tickets")
-public class Ticket {
+public class Ticket{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -41,8 +41,34 @@ public class Ticket {
         this.plane = plane;
     }
 
+    public void deleteTicket() {
+        passenger.deleteTicket(this);
+        plane.deleteTicket(this);
+    }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 32));
+        return result;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Ticket other = (Ticket) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
+
+    // GETTERS AND SETTERS
     public long getId() {
         return id;
     }
